@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Reservation System</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Traveller's Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div class="bus-details" style="display: none;">
+        <h2>Bus Details</h2>
+        <p>Bus: ABC Bus Company</p>
+        <p>Timings: 9:00 AM, 2:00 PM, 7:00 PM</p>
+        <p>Destinations: City A, City B, City C</p>
+    </div>
+
+    <div class="booking-form" style="display: none;">
+        <h2>Booking Form</h2>
+        <label for="passengerName">Passenger Name:</label>
+        <input type="text" id="passengerName">
+        <label for="destination">Select Destination:</label>
+        <select id="destination">
+            <option value="City A">City A</option>
+            <option value="City B">City B</option>
+            <option value="City C">City C</option>
+        </select>
+        <button onclick="bookTicket()">Submit</button>
+    </div>
+
+    <div class="passenger-list" style="display: none;">
+        <h2>Passenger List</h2>
+        <ul id="passengerList">
+            <!-- Passenger details will be displayed here -->
+        </ul>
+    </div>
+
+    <script>
+        let loggedInUser;
+        let passengers = [];
+
+        function login() {
+            const username = document.getElementById("username").value;
+            loggedInUser = username; // For simplicity, assuming successful login
+            document.querySelector(".login-form").style.display = "none";
+            document.querySelector(".bus-details").style.display = "block";
+            document.querySelector(".booking-form").style.display = "block";
+        }
+
+        function bookTicket() {
+            const passengerName = document.getElementById("passengerName").value;
+            const destination = document.getElementById("destination").value;
+            passengers.push({ name: passengerName, destination: destination });
+            displayPassengerList();
+        }
+
+        function displayPassengerList() {
+            const passengerList = document.getElementById("passengerList");
+            passengerList.innerHTML = "";
+            for (const passenger of passengers) {
+                const listItem = document.createElement("li");
+                listItem.innerText = `${passenger.name} - Destination: ${passenger.destination}`;
+                passengerList.appendChild(listItem);
+            }
+            document.querySelector(".passenger-list").style.display = "block";
+        }
+    </script>
+</body>
+</html>
